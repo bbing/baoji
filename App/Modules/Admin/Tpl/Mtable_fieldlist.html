@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>模型管理 字段管理</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+    <load href='__PUBLIC__/Js/style.js'/>
+
+</head>
+<body>
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="27" colspan="6" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7" valign="top">
+      <table width="96%" border="0" cellspacing="1" cellpadding="1" >
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b><{$Think.lang.lan_fieldop}></b> </td>
+          <td width="76%" align="right"><b>
+         <a href="<{:u('index')}>"><u><{$Think.lang.lan_mode}></u></a>
+            </b>
+          </td>
+        </tr>
+              </table>
+     </td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+   <td colspan="6" height="24">§<{$Think.lang.lan_zy}><br>
+   
+   <{$Think.lang.lan_mx}>：<{$data['name']}><br>
+   <{$Think.lang.lan_fb}>：<{:C('DB_PREFIX')}><{$data['code']}>
+   </td>
+  </tr>
+  
+  <tr bgcolor="#FBFCE2">
+    <td width="18%" height="24" align="center"><{$Think.lang.lan_zname}></td>
+    <td width="23%" align="center"><{$Think.lang.lan_bname}></td>
+    <td width="12%" align="center"><{$Think.lang.lan_btype}></td>
+    <td width="12%" align="center"><{$Think.lang.lan_blength}></td>
+    <td width="23%" align="center"><{$Think.lang.lan_bop}></td>
+  </tr>
+
+
+<foreach name='fields' item='list'>
+    <tr bgcolor="#FFFFFF" align="center" class="hover">
+    <td width="18%" height="24" align="center"><{$list['name']}></td>
+    <td width="18%" height="24" align="center"><{$list['code']}></td>
+    <td width="23%" align="center">
+    
+    <switch name='list["type"]'>
+     <case value='int'><{$Think.lang.lan_stype}></case>
+     <case value='varchar'><{$Think.lang.lan_dtype}></case>
+     <case value='text'><{$Think.lang.lan_ttype}></case>
+     <case value='time'><{$Think.lang.lan_ttime}></case>
+     <case value='edit'><{$Think.lang.lan_htype}></case>
+    </switch>
+    </td>
+    <td width="12%" align="center"><if condition="$list['type'] neq 'text' and $list['type'] neq 'edit' "><{$list['length']}></if></td>
+    <td >
+     <a href="<{:U('fieldedit',array('id'=>$list['id']))}>" ><u><{$Think.lang.lan_xname}></u></a> |
+     <a href="<{:U('fielddel',array('id'=>$list['id']))}>" class='confirmdel'>     <u><{$Think.lang.lan_delc}></u>
+     </a>
+    </td>
+    </tr>
+</foreach>
+
+
+<tr bgcolor="#FFFFFF">
+    <td height="24" colspan="6" valign="top">
+    <form action="<{:U('do_addfield')}>" method='post'>
+        <table height="30" width='100%'>
+       <tr>
+        <td>  
+        <{$Think.lang.lan_zname}>:<input type="text" name="name" /> 
+        <{$Think.lang.lan_bname}>:<input type="text" name="code" /> 
+        <{$Think.lang.lan_btype}>:<select name='type'>
+        	 <option value="int"><{$Think.lang.lan_stype}></option>
+             <option value="varchar"><{$Think.lang.lan_dtype}></option>
+             <option value="text"><{$Think.lang.lan_ttype}></option>
+             <option value="time"><{$Think.lang.lan_ttime}></option>
+             <option value="edit"><{$Think.lang.lan_htype}></option>
+             </select>
+        <{$Think.lang.lan_blength}>:<input type="text" name="length"  value="0" /> 
+        <input type="submit" name="submit" value="<{$Think.lang.lan_afiled}>" /></td>
+        </tr>
+        </table>
+        <input type="hidden" value="<{$id}>" name='id'>
+     </form>
+    　</td>
+  </tr>
+    <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="6" align="center" valign="top">
+     
+    </td>
+  </tr>
+</table>
+</body>
+</html>

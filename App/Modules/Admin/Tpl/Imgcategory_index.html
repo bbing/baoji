@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>图片类型管理</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+      <script  type="text/javascript">
+     var delurl="<{:U('delall')}>";//删除
+
+	  var turl="<{:U('index')}>";
+     </script>
+    <load href='__PUBLIC__/Js/style.js'/>
+
+</head>
+<body> 
+	<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="27" colspan="5" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+    
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b><{$Think.lang.lan_lists}></b> </td>
+          <td width="76%" align="right" background="__PUBLIC__/images/frame/tbg.gif"><b>
+          
+           
+        
+            </b>
+          </td>
+        </tr>
+      </table>
+     </td>
+  </tr>
+  <tr>
+   <td bgcolor="#FFFFFF" align="left" colspan='5' style="padding-left:10px;"><{$Think.lang.lan_info}></td>
+  </tr>
+  
+  
+  <tr>
+  <td width="4%" align="center" bgcolor="#FFFFFF"><{$Think.lang.lan_select}></td>
+  <td bgcolor="#FFFFFF" align="center"><{$Think.lang.lan_name}></td>
+
+	<td bgcolor="#FFFFFF" align="center"><{$Think.lang.lan_csort}></td>
+	<td width="27%" align="center" bgcolor="#FFFFFF"><{$Think.lang.lan_cdo}></td>
+  </tr>
+ <form name="form" action="<{:U('do_sort')}>" method='post'>
+  <foreach name='lists' item='list'>
+    <tr bgcolor="#FFFFFF" align="center"   class='hover' >
+    <td><input name="id[]"  class='aid' type="checkbox" value="<{$list['id']}>"  id="sort_<{$list['id']}>"><{$list['id']}></td>
+    <td width="35%" height="24" align="left" style="padding-left:10px" ><input class='typename' name="typename_<{$list['id']}>" value="<{$list['fullname']}>"  type="text" id="typename_<{$list['id']}>"></if></td>
+
+    <td width="14%" height="24" align="center" style="padding-left:10px" >
+	<input type="text" class='sort' name="sort_<{$list['id']}>" value="<{$list['sort']}>" id="<{$list['id']}>" size='2' />
+    <td>
+     <a href="<{:U('img/index',array('typeid'=>$list['id']),'')}>"><u><{$Think.lang.lan_see}></u></a>|
+     
+     <a href='<{:U('del',array('id'=>$list['id']))}>' class='confirmdel'><u><{$Think.lang.lan_delc}></u></a>
+    </td>
+  </tr>
+</foreach>
+    <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="6" align="left" valign="top" style=" padding-left:10px">
+      <span><input type="submit"  value="<{$Think.lang.lan_clicksort}>" >
+        <input type="button"  value="<{$Think.lang.lan_delc}>" class='del' ></span>
+    </td>
+  </tr>
+</form>
+
+
+  <tr>
+  <td bgcolor="#FFFFFF" align="left" colspan='5' style="padding-left:10px;">
+  <form action="<{:U('do_add')}>" name="form1" method="post">
+  分类名称:<input name="typename" type="text" step="width:300px;">&nbsp;&nbsp;
+  分类排序：<input name="sort" type="text" step="width:300px;"  value="0">
+  <input type='submit' value="添加分类">
+  </form>
+  </td>
+  </tr>
+</table>  
+</body>
+</html>

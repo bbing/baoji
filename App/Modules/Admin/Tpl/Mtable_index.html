@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title><{$Think.lang.lan_mode}></title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+    <load href='__PUBLIC__/Js/style.js'/>
+
+</head>
+<body>
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="27" colspan="6" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b><{$Think.lang.lan_mode}></b> </td>
+          <td width="76%" align="right"><b>
+          
+         
+        
+            </b>
+          </td>
+        </tr>
+      </table>
+     </td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td height="24" colspan="6"><{$Think.lang.lan_zy}></td>
+  </tr>
+  <tr bgcolor="#FBFCE2">
+    <td width="18%" height="24" align="center">ID</td>
+    <td width="23%" align="center"><{$Think.lang.lan_name}></td>
+    <td width="12%" align="center"><{$Think.lang.lan_table}></td>
+    <td width="12%" align="center"><{$Think.lang.lan_time}></td>
+    <td width="23%" align="center"><{$Think.lang.lan_op}></td>
+  </tr>
+  <foreach name='lists' item='list'>
+    <tr bgcolor="#FFFFFF" align="center" class="hover">
+      <td width="18%" height="24" align="center"><{$list['id']}></td>
+    <td width="18%" height="24" align="center"><{$list['name']}></td>
+    <td width="23%" align="center"><{$list['code']}></td>
+<td width="12%" align="center"><{$list['optime']|date="Y-m-d H:i:s",###}></td>
+    <td >
+     <a href='<{:U('fieldlist',array('id'=>$list['id']))}>' ><u><{$Think.lang.lan_edit}></u></a> |
+     <a href='<{:U('del',array('id'=>$list['id']))}>' class='confirmdel'><u><{$Think.lang.lan_delc}></u></a>
+    </td>
+  </tr>
+</foreach>
+    <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="6" align="center" valign="top">
+      <span><{$page}></span>
+    </td>
+  </tr>
+  
+  <tr bgcolor="#FFFFFF">
+    <td height="24" colspan="6" valign="top">
+    <form action="<{:U('do_add')}>" method='post'>
+        <table height="30" width='100%'>
+       <tr>
+        <td>  
+        <{$Think.lang.lan_name}>:<input type="text" name="name" /> 
+        <{$Think.lang.lan_table}>:<input type="text" name="code" /> 
+        <input type="submit" name="submit" value="<{$Think.lang.lan_addtable}>" /></td>
+        </tr>
+        </table>
+        <input type="hidden" value="<{$id}>" name='id'>
+     </form>
+    　</td>
+  </tr>
+</table>
+</body>
+</html>

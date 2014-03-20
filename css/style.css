@@ -1,0 +1,119 @@
+@charset "utf-8";
+*{margin:0;padding:0;background:transparent;font-size:100%;vertical-align:baseline;outline:none}
+body, button, input, select, textarea { font:12px/1.62 'Microsoft YaHei','Helvetica Neue',Helvetica,Arial,Sans-serif;color:#222;vertical-align:middle;word-wrap: break-word;outline:none;-webkit-text-size-adjust:none;}
+body {background:#fff;-webkit-tap-highlight-color: rgba(0,0,0,0);_margin:0; _height:100%;}
+h1, h2, h3, h4, h5, h6{font-size:100%; font-weight:normal}
+ul,li{ list-style:none}
+a {color:#4e829f;text-decoration:none}
+a:hover{}
+sup { vertical-align:text-top }
+sub { vertical-align:text-bottom }
+em{font-style:normal}
+legend { color:#000 }
+fieldset, img { border:0 }
+table { border-collapse:collapse; border-spacing:0 }
+caption,th {text-align:left}
+th{text-align:inherit}
+img{vertical-align:top;border:0 none}
+textarea {overflow:hidden;overflow-y:auto; resize:none;_zoom:1}
+input { line-height:1.2em; overflow:hidden;_zoom:1}
+q:before, q:after { content:'' } 
+.fn-clear:after {visibility: hidden;display: block;font-size: 0;content: " ";clear: both;height: 0;}
+.fn-clear{*zoom:1;}
+.pa{position:absolute;}
+.hidden{display:none}
+.pb20{padding-bottom: 20px;}
+.pb50{padding-bottom: 50px;}
+.clear{width: 0px;height: 0px;clear: both;}
+
+.logo,#sleBG,#about,.slogan #s1,.slogan #s2,.slogan #s3,.slogan #s4,#product,#service,#use,#titanium,#zhaopin,#contact{background: url(../images/sprite.png) no-repeat;}
+
+#H{height: 500px;width: 100%;background: url(../images/background.jpg) 0 0 repeat #616d74;background-position: center center !important;background-size: cover;-webkit-background-size: cover;}
+#h{width: 100%;height: 30px;background: url(../images/h-bj.png)  repeat;padding: 32px 0;}
+.head{width: 1002px;margin:0 auto;}
+.logo {float: left;width: 69px;height: 24px;background-position: 0 0;}
+.logo a {display: block;width: 69px;height: 24px;text-indent: -9999em;}
+.nav{float:left;height:40px;margin-left: 140px;}
+.nav li{float:left;height:30px;padding: 0 3px;}
+.nav li a{display:block;height:30px;width:80px;border:2px solid transparent;font-size:13px;font-weight:300;text-align:center;color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,.6);line-height:30px;}
+.nav li a:hover,.nav li.active a{border:2px solid #4bcaff;color: #4bcaff}
+.language{height:40px;float: right;padding: 5px;}
+#sleHid { display:block; width:54px; overflow:hidden; background-color: #6c777c;}     
+#sleBG { width:78px; height:20px;background-position: 0 -26px; display:block;}
+.language select{ width:80px; height:18px;text-align: center; border:none;color: #FFF;background-color: #6c777c;}
+#H h2{color: #fff;background: url(../images/h-bj.png)  repeat;font-size: 24px;text-align: center;}
+.slogan1{margin:150px auto 10px auto;width: 320px;}
+.slogan2{margin:0px auto;width: 500px;}
+
+.container{width: 1002px;margin:0 auto;padding-top: 30px;position: relative;}
+#S-1{width: 100%;background-color: #4bcaff}
+#about{width:117px;height: 38px;background-position: -1px -53px;}
+#about a {display: block;width: 117px;height: 38px;text-indent: -9999em;}
+.slogan{width: 100%;height: 80px;margin-top: 20px;}
+.slogan li{width: 42px;height: 80px;float: left;margin-right: 255px;text-indent: -9999em;}
+.slogan #s1{background-position: -2px -95px;}
+.slogan #s2{background-position: -54px -94px;}
+.slogan #s3{background-position: -4px -177px;}
+.slogan #s4{background-position: -55px -177px;float: right;margin-right: 40px;}
+#S-1 p{text-indent: 20px;padding-top: 10px;color: #fff;font-size: 14px;}
+
+#S-2{width: 100%;background-color: #FFF;}
+#product{width: 119px;height: 38px;background-position: -1px -262px;float: left;}
+#product a{display:block;width: 119px;height: 38px;text-indent: -9999em;}
+#productnav{float: right;}
+#productnav li{float: left;height:30px;margin-left: 20px;}
+#productnav li a{display: block; color: #69747b;height:30px;border:2px solid transparent;line-height:30px;font-size:14px;font-weight:500;text-align:center;padding: 0px 10px;}
+#productnav li a:hover,#productnav li.active a{border:2px solid #4bcaff;color: #4bcaff} 
+#productpic{width: 100%;clear: both;padding-top: 50px;}
+#productpic li{float: left;margin-right: 14px;width: 240px;height: 240px;margin-bottom: 14px;}
+#productpic li.lastimg{margin-right: 0;}
+
+#S-3{width: 100%;background-color: #515f67;}
+#service{width: 150px;height: 38px;background-position: -1px -305px;}
+#service a{display: block; width: 150px;height: 38px;text-indent: -9999em;}
+.intro{ width: 46%;padding-top: 20px;color: #fff;font-size: 13px;float: left;}
+.intro p {text-indent: 20px;padding-top: 10px;}
+#S-3 .view{width: 120px;height: 40px;line-height: 40px;font-size: 15px;margin-top: 20px;margin-bottom:20px;color: #374148;border: 2px solid #353f46;font-weight: 700;cursor:pointer;}
+.video{width: 40%;height: 200px;float: right;border:1px solid #000;}
+
+#S-4{width: 100%;background-color: #4bcaff;}
+#use{width: 118px;height: 39px;background-position: -1px -346px;}
+#use a{display: block;width: 118px;height: 39px;text-indent: -9999em;} 
+#S-4 span{padding: 20px 0 10px 0;color: #fff;font-size: 13px;display: inline-block;}
+#S-4 p{color: #FFF;text-indent: 20px;font-size: 13px;line-height: 25px;}
+#S-4 .view{display: block; width: 170px;height: 40px;line-height: 40px;font-size: 15px;margin:20px auto 0 auto;color: #FFF;border: 2px solid #fff;font-weight: 400;cursor:pointer;}
+#S-4 .container{padding-bottom: 20px;}
+
+#S-5{width: 100%; background:url(../images/tai-bg.jpg) 0 0 repeat #4c565e;background-position: center center !important;background-size: cover;-webkit-background-size: cover;}
+#titanium{width: 88px;height: 38px;background-position: -1px -388px;}
+#titanium a{display: block;width: 88px;height: 38px;text-indent: -9999em;}
+#S-5 p{color: #FFF;text-indent: 20px;font-size: 13px;line-height: 25px;padding:10px 0 20px 0;}
+
+#S-6{width: 100%;background-color: #fff;}
+#zhaopin{width: 119px;height: 38px;background-position: -2px -429px;}
+#zhaopin a{display: block;width: 119px;height: 38px;text-indent: -9999em;}
+#S-6 p{color: #515f67;padding-left: 20px;}
+#S-6 p.large{font-size: 28px;font-weight: 500;padding-top: 20px;}
+#S-6 p.middle{font-size: 24px;padding-bottom: 40px;}
+#S-6 p.middle a{color: #4bcaff;}
+#S-6 .view{width: 170px;height: 70px;line-height: 70px;color:#4bcaff;text-align:center;font-size: 20px; border: 2px solid #4bcaff;display: block;position: absolute;right: 100px;top: 90px;}
+
+#S-7{width: 100%;background:url(../images/contact-bg.jpg) 0 0 repeat #738189;background-position: center center !important;background-size: cover;-webkit-background-size: cover;float: left;}
+#contact{width: 118px;height: 38px;background-position: -3px -471px;}
+#contact a{display: block;width: 118px;height: 38px;text-indent: -9999em;}
+.contactform{width: 50%;float: left;}
+.contactform .input{width: 48%;float: left;margin-top: 30px;color: #fff;}
+.input input{width: 90%;height: 30px;border: 2px solid #fff;text-indent: 10px;color: #fff;}
+.message{clear: both;padding-top: 30px;}
+.message p{color: #fff;}
+.message textarea{width: 87%;border: 2px solid #fff;padding: 10px; color: #fff;height: 200px;;line-height: 25px;}
+#submit{width: 200px;height: 50px;line-height: 50px; color: #fff;text-align: center;margin-top: 30px;margin-bottom: 50px;border: none;background-color: #4bcaff;cursor: pointer;font-size: 16px;}
+.address{width: 45%;float: right;padding-top: 45px;}
+.address p{color:#fff; font-size: 13px;}
+.address span{color: #fff;font-size: 14px;}
+
+#F{width: 100%;background-color: #353f47;float: left;;}
+.fnav{float: left;padding: 40px;}
+.fnav li{float: left;padding-right: 5px;padding-left:5px;color: #445058;}
+.fnav li a{color: #445058;font-size: 13px;}
+.copyright{float: right;color: #444f57;padding: 40px;}

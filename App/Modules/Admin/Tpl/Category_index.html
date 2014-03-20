@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>网站栏目管理</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+  <load href='__PUBLIC__/Js/style.js'/>
+
+</head>
+<body> <form name="form" action="<{:U('do_sort')}>" method='post'>
+	<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="27" colspan="5" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+    
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b><{$Think.lang.lan_lists}></b> </td>
+          <td width="76%" align="right" background="__PUBLIC__/images/frame/tbg.gif"><b>
+          
+            <a href="<{:U('add')}>"><u><{$Think.lang.lan_add}></u></a>
+        
+            </b>
+          </td>
+        </tr>
+      </table>
+     </td>
+  </tr>
+     <tr>
+    <td bgcolor="#FFFFFF" align="left" colspan='5' style="padding-left:10px;"><{$Think.lang.lan_info}></td>
+ 
+  </tr>
+  <tr>
+  <td width="4%" align="center" bgcolor="#FFFFFF">ID</td>
+  <td bgcolor="#FFFFFF" align="center"><{$Think.lang.lan_name}></td>
+  <td bgcolor="#FFFFFF" align="center"><{$Think.lang.lan_type}></td>
+	<td bgcolor="#FFFFFF" align="center"><{$Think.lang.lan_csort}></td>
+	<td width="27%" align="center" bgcolor="#FFFFFF"><{$Think.lang.lan_cdo}></td>
+  </tr>
+ 
+  <foreach name='lists' item='list'>
+    <tr bgcolor="#FFFFFF" align="center"   class='hover' >
+    <td><input class="aid" type="checkbox" name="id[]" id="sort_<{$list['id']}>" value="<{$list['id']}>"/><{$list['id']}></td>
+    <td width="35%" height="24" align="left" style="padding-left:10px" ><a href='<{:U('edit',array('id'=>$list['id']),'')}>'><{$list['fullname']}></a> <if condition="$list['isshow'] eq 0"> (<font color='red'><{$Think.lang.lan_hide}></font>) </if><if condition="$list['pic']">(<font color='red'>图片</font>)</if></td>
+    <td width="20%" height="24" align="center" style="padding-left:10px" >
+      <switch  name="list['type']">
+        <case value="0"><{$Think.lang.lan_category}></case>
+        <case value="1"><{$Think.lang.lan_channel}></case>
+        <case value="2"><{$Think.lang.lan_link}></case>
+      </switch>
+    </td>
+    <td width="14%" height="24" align="center" style="padding-left:10px" >
+	<input type="text" class='sort' name="sort_<{$list['id']}>" value="<{$list['sort']}>" id="<{$list['id']}>" size='2' />
+    <td>
+     <a href="<{:U('Article/index',array('typeid'=>$list['id']),'')}>"><u><{$Think.lang.lan_see}></u></a>|
+     <a href='<{:U('edit',array('id'=>$list['id']),'')}>' ><u><{$Think.lang.lan_change}></u></a> |
+     <a href='<{:U('add',array('id'=>$list['id']),'')}>'><u><{$Think.lang.lan_addc}></u></a> |	
+     <a href='<{:U('del',array('id'=>$list['id']))}>' class='confirmdel'><u><{$Think.lang.lan_delc}></u></a>
+    </td>
+  </tr>
+</foreach>
+    <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="6" align="left" valign="top" style=" padding-left:10px">
+      <span><input type="submit"  value="<{$Think.lang.lan_clicksort}>" ></span>
+    </td>
+  </tr>
+
+</table>  </form>
+</body>
+</html>

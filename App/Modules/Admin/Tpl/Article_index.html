@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>文档管理</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+     <script  type="text/javascript">
+   var delurl="<{:U('delall')}>";//删除
+	 var checkurl="<{:U('check')}>";//审核
+	 var dcheckurl="<{:U('dcheck')}>";//删除审核
+   var attrurl="<{:U('attr')}>"//属性添加
+   var dattrurl="<{:U('dattr')}>"//属性删除
+	 var turl="<{:U('index',array('typeid'=>I('typeid')))}>";
+     </script>
+     <load href='__PUBLIC__/Js/style.js'/>
+</head>
+<body>
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+<form name="form" action="<{:U('do_sort')}>" method='post'>
+  <tr>
+    <td height="27" colspan="8" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b><{$typename|default='所有文档'}>文档管理</b> </td>
+          <td width="76%" align="right"><b>
+            <a href="<{:U(GROUP_NAME.'/Article/add',array('typeid'=>I('typeid')))}>"><u>文档添加</u></a>
+            </b>
+          </td>
+        </tr>
+      </table>
+     </td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td height="24" colspan="8">　</td>
+  </tr>
+  <tr bgcolor="#FBFCE2">
+    <td width="7%" height="24" align="center">选择<input name='all' type="checkbox" value=""></td>
+    <td width="36%" align="center">标题</td>
+    <td width="11%" align="center">排序</td>
+
+    <td width="13%" align="center">点击次数</td>
+    <td width="11%" align="center">栏目分类</td>
+    <td width="11%" align="center">发布时间</td>
+    <td width="22%" align="center">管理项</td>
+  </tr>
+  <foreach name='lists' item='list'>
+    <tr bgcolor="#FFFFFF" align="center" class="hover">
+      <td width="7%" height="24" align="center"><input class="aid" type="checkbox" name="id[]" id="sort_<{$list['id']}>" value="<{$list['id']}>"/><{$list['id']}></td>
+    <td width="36%" height="24" align="center"><a href="<{:U('edit',array('id'=>$list['id']))}>" ><{$list['title']}></a><if condition="$list['isshow'] eq 0"><span class="red">[审核中]</span></if><if condition="$list['pic']"><font color='red'>[图]</font></if><foreach name='list.attr' item='value'><strong style='color:<{$value.color}>;padding:0 5px'>[<{$value.name}>]</strong></foreach></td>
+    <td width="11%" height="24" align="center"><input class="sort"  name='sort_<{$list['id']}>' id="<{$list['id']}>" size='2'  type='text' value="<{$list['sort']}>"/></td>
+    <td width="13%" align="center"><{$list['hit']}></td>
+    <td width="11%" align="center"><{$list['typename']}></td>
+<td width="11%" align="center"><{$list['time']|date="Y-m-d",###}></td>
+    <td >
+     <a href="<{:U('edit',array('id'=>$list['id']))}>" ><u>修改</u></a> |
+     <a href="<{:U('del',array('id'=>$list['id']),'')}>" class='confirmdel'><u>删除</u></a> | <a href="<{$list['yurl']}>"  target='_blank'><u>预览</u></a> 
+    </td>
+  </tr>
+</foreach>
+ <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="8" align="center" valign="top">
+      <span><{$page}></span>
+    </td>
+  </tr>
+
+  <tr bgcolor="#F9FCEF">
+
+    <td height="24" colspan="4" align="left" valign="top" style=" padding-left:10px">
+      <span><input type="submit"  value="点击排序" ></span>
+      <span><input type="button"  value="审核"  class='check' ></span>
+      <span><input type="button"  value="删除审核" class='dcheck'></span>
+      <span><input type="button"  value="删除文档" class='del '></span>
+    </td>
+    <td align="right" colspan='3'>
+        <span>属性:
+          <select id='attr'>
+            <foreach name='attr' item='v'>
+              <option value="<{$v['id']}>"><{$v['name']}></option>
+            </foreach>
+          </select>
+          <input type="button" value='增加属性' class='attr' />
+          <input type="button" value='删除属性' class='dattr' />
+        </span>
+    </td>
+  </tr>
+    <input type="hidden" name='typeid' value="<{:I('typeid')}>" />
+   </form>
+  <tr bgcolor='#F9FCEF' >
+  <td colspan="8">
+   <form action="<{:U('index')}>"  method='post'>
+     <table width="98%">
+       <tr>
+              <td width="15%">
+                分类选择：
+                <select name="typeid">
+                 <option value="<{:I('taypeid')}>">当前分类</option>
+                <foreach name="category" item='c'>
+                	<option value="<{$c['id']}>" <if condition="$c['id'] eq I('typeid')">selected</if>><{$c['fullname']}></option>
+                </foreach>
+                </select>
+              </td>
+              <td width="29%" align="left">
+              排序选择：
+                 <select name="listsort">
+                 <option value="time" <if condition="$listsort eq time">selected</if>>时间</option>
+                 <option value="sort" <if condition="$listsort eq sort">selected</if>>排序值</option>
+                 </select>
+                 &nbsp;&nbsp;
+                <select name="listorder">
+                 <option value="desc" <if condition="$listorder eq desc">selected</if>>大到小</option>
+                 <option value="asc"  <if condition="$listorder eq asc">selected</if>>小到大</option>
+                 </select>
+              </td>
+               <td width="56%" align="left">
+              关键字：
+                  <input name="key" type="text"/>
+                  <input type="submit" value="搜索">
+              </td>
+            </tr>
+         </table></form>
+        </td>
+       </tr>
+</table>
+
+
+</body>
+</html>

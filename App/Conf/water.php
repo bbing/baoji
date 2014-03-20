@@ -1,0 +1,1 @@
+<?php	return array ( 'WATER_OPEN' => '0', 'WATER_IMAGE' => './Common/Images/logo.png', 'WATER_POS' => '10', 'WATER_ALPHA' => '60', 'WATER_COMPRESSION' => '80', 'WATER_OPEN_FONT' => '0', 'WATER_TEXT' => 'HouDunWang.com', 'WATER_ANGLE' => '0', 'WATER_FONTSIZE' => '30', 'WATER_FONTCOLOR' => '#670768', 'WATER_FONTFILE' => './Common/Images/font.ttf', 'WATER_CHARSET' => 'UTF-8', );?>

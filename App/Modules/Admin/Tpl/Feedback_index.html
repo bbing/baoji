@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>留言信息管理</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+     <script  type="text/javascript">
+     var delurl="<{:U('delall')}>";//删除
+
+	 var turl="<{:U('index',array('typeid'=>I('typeid')))}>";
+     </script>
+     <load href='__PUBLIC__/Js/style.js'/>
+</head>
+<body>
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+<form name="form" action="<{:U('do_sort')}>" method='post'>
+  <tr>
+    <td height="27" colspan="8" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b>所有留言</b> </td>
+          <td width="76%" align="right"><b>
+           
+            </b>
+          </td>
+        </tr>
+      </table>
+     </td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td height="24" colspan="8">　</td>
+  </tr>
+  <tr bgcolor="#FBFCE2">
+    <td width="6%" height="24" align="center">选择<input name='all' type="checkbox" value=""></td>
+    <td width="17%" align="center">标题</td>
+    <td width="13%" align="center">留言人</td>
+
+    <td width="16%" align="center">留言时间</td>
+    <td width="12%" align="center">是否显示</td>
+    <td width="12%" align="center">回复人</td>
+    <td width="16%" align="center">回复时间</td>
+    <td width="8%" align="center">管理项</td>
+  </tr>
+  <foreach name='lists' item='list'>
+    <tr bgcolor="#FFFFFF" align="center" class="hover">
+      <td width="6%" height="24" align="center"><input class="aid" type="checkbox" name="id[]" id="sort_<{$list['id']}>" value="<{$list['id']}>"/></td>
+    <td width="17%" height="24" align="center"><{$list['title']}></td>
+    <td width="13%" height="24" align="center"><{$list['person']}></td>
+    <td width="16%" align="center"><{$list['time']|date="Y-m-d",###}></td>
+    <td width="12%" align="center"><{$list['isshow']}></td>
+    <td width="12%" align="center"><{$list['rename']}></td>
+<td width="16%" align="center"><{$list['retime']|date="Y-m-d",###}></td>
+    <td >
+     <a href="<{:U('edit',array('id'=>$list['id']))}>" ><u>查看</u></a> |
+     <a href="<{:U('del',array('id'=>$list['id']),'')}>" class='confirmdel'><u>删除</u></a> 
+    </td>
+  </tr>
+</foreach>
+  <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="8" align="left" valign="top" style=" padding-left:10px">
+     
+      <span><input type="button"  value="删除选中" class='del '></span>
+    </td>
+  </tr>
+    <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="8" align="center" valign="top">
+      <span><{$page}></span>
+    </td>
+  </tr></form>
+  
+</table>
+
+
+</body>
+</html>

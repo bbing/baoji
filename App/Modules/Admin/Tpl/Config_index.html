@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>系统基本设置</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+    <load href='__PUBLIC__/Js/style.js'/>
+  <script type="text/javascript">
+  $(function(){
+      $('#configadd').hide();
+      $('.configadd').click(function(){
+        $('#configadd').show();
+      });
+      <foreach name='datalists' item='lists'>
+      $('#config<{$key+2}>').hide();
+      </foreach>
+      $('.config_title >span').click(function(){
+            var attr1=$(this).attr('rel');
+            //alert(attr1);
+            $('.config_title >span').each(function(){
+                var attr2=$(this).attr('rel');
+                if(attr1==attr2)
+                {
+                  $('#'+attr2).show();
+                }
+                else
+                {
+                  $('#'+attr2).hide();
+                }
+            });
+       });
+  });
+
+  </script>
+</head>
+<body background='__PUBLIC__/Images/allbg.gif' leftmargin='8' topmargin='8'>
+	<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="19" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7"> 
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr> 
+          <td style="padding-left:10px;"><b><strong><{$Think.lang.lan_gconfig}></strong></b> </td>
+          <td align=right><b><strong><a href='###' class='configadd'><{$Think.lang.lan_aconfig}></a></strong></b></td>
+        </tr>
+      </table></td>
+   </tr>
+
+<tr><td align='center' background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+   <table>
+      <tr>
+          <td class="config_title">
+            <foreach name='datalists' item='lists'>
+              <span rel='config<{$key+1}>'><{$lists.info}></span>&nbsp;<if condition="$key+1 neq count($datalists) ">
+                |
+              </if>&nbsp;
+            </foreach>
+          </td>
+      </tr>
+   </table>
+</td></tr>
+
+   <tr id="configadd">
+     <td  align="center" valign="top" bgcolor="#FFFFFF">
+       <form action="<{:U(GROUP_NAME.'/Config/add_config')}>" name="configadd" method="post">
+         <table width="98%" bgcolor="#D6D6D6" cellspacing="1" cellpadding="1">
+           <tr>
+            <td  bgcolor="#FFFFFF" height='30'  style="padding:3px;" >   类别：</td>
+            <td  bgcolor="#FFFFFF" height='30'  style="padding:3px;" >
+            <select name='reid'>
+              <foreach name='datalists' item='lists'>
+              <option value="<{$lists.id}>"><{$lists.info}></option>
+              </foreach>
+            </select>
+            </td>
+             <td bgcolor="#FFFFFF" height='30'  style="padding:3px;"  ><span class='red'>*</span><{$Think.lang.lan_bname}></td>
+             <td bgcolor="#FFFFFF" height='30'  style="padding:3px;"><input type="text" name="name" style='width:80%' /></td>    
+             <td bgcolor="#FFFFFF" height='30'  style="padding:3px;" ><{$Think.lang.lan_czhi}></td>
+             <td bgcolor="#FFFFFF" height='30'  style="padding:3px;" ><input type="text" name="content" style='width:80%' /></td>
+           </tr>
+            <tr>
+             <td bgcolor="#FFFFFF" height='30'  style="padding:3px;" ><span class='red'>*</span><{$Think.lang.lan_cinfo}></td>
+             <td bgcolor="#FFFFFF" height='30'  style="padding:3px;" ><input type="text" name="info" style='width:80%' /></td>
+             <td bgcolor="#FFFFFF" height='30'  style="padding:3px;" ><{$Think.lang.lan_ctype}></td>
+             <td bgcolor="#FFFFFF" height='30'  style="padding:3px;"  colspan='2' >
+             <input type="radio" name="type" value='string' id='string' checked/>&nbsp;<label for="string"><{$Think.lang.lan_cwb}></label>
+             <input type="radio" name="type" value='bstring'id='bstring'/>&nbsp;<label for="bstring"><{$Think.lang.lan_cdhwb}></label>
+             <input type="radio" name="type" value='bool' id='bool'/>&nbsp;<label for="bool"><{$Think.lang.lan_cb}></label>
+             <input type="radio" name="type" value='number' id='number'/>&nbsp;<label for="number"><{$Think.lang.lan_sz}></label>
+           
+             </td>
+             <td bgcolor="#FFFFFF" height='30'  style="padding:3px;" ><input type="submit" name="submit" value=" <{$Think.lang.lan_bc}> " class="coolbg np" /></td
+           </tr>
+
+         </table>
+       </form>
+     </td>
+   </tr>
+  <tr>
+  <td  align="center" valign="top" bgcolor="#FFFFFF">
+	<form name="form1" action="<{:U(GROUP_NAME.'/Config/edit_config')}>" method="post">
+    <foreach name="datalists" item='lists'>
+  <table width="98%" border="0" cellspacing="1" cellpadding="1" bgcolor="#D6D6D6" id="config<{$key+1}>">
+   <tr bgcolor="#FBFCE2">
+      <td align='center'><{$Think.lang.lan_cinfo}></td>
+			<td align='center'><{$Think.lang.lan_czhi}></td>
+			<td align='center'><{$Think.lang.lan_bname}></td>
+   </tr>
+
+     <foreach name='lists.child' item='datalist'>
+
+          <tr > 
+            <td height="30" bgcolor='<if condition="$key%2 eq 0">#F9FCEF<else/>#ffffff</if>' style="padding:3px;"  width="300"><{$datalist['info']}>：</td>
+            <td style="text-align:left;" bgcolor='<if condition="$key%2 eq 0">#F9FCEF<else/>#ffffff</if>'>
+            <if condition="$datalist['type'] eq 'string'">
+            	<input name="<{$datalist['name']}>" type="text" id="<{$datalist['name']}>"  value='<{$datalist['content']}>' style='width:80%'/> &nbsp;
+              <elseif condition="$datalist['type'] eq 'number'"/>
+                <input name="<{$datalist['name']}>" type="text" id="<{$datalist['name']}>"  value='<{$datalist['content']}>' style='width:30%'/> &nbsp;
+            <elseif condition="$datalist['type'] eq 'bstring'"/>
+            	<textarea name='<{$datalist['name']}>' id="<{$datalist['name']}>" class='textarea_info' style='width:98%;height:50px'><{$datalist['content']}></textarea>&nbsp;
+            <elseif condition="$datalist['type'] eq bool"/>
+            	<input type='radio' class='np' name='<{$datalist['name']}>' value='Y'  
+        		 <if condition="$datalist['content'] eq 'Y'"> checked  </if>><{$Think.lang.lan_yes}>&nbsp;
+         		 <input type='radio' class='np' name='<{$datalist['name']}>' value='N'  
+          		<if condition="$datalist['content'] eq 'N'">  checked </if>><{$Think.lang.lan_no}>&nbsp;
+            </if>
+            </td>
+            <td  align='center' bgcolor='<if condition="$key%2 eq 0">#F9FCEF<else/>#ffffff</if>'><{$datalist['name']}></td>
+          </tr>
+
+          </foreach>
+        </table>
+  </foreach>
+
+      <table width="98%" border="0" cellspacing="1" cellpadding="1" bgcolor="#D6D6D6">
+          <tr bgcolor="#F9FCEF"> 
+
+            <td height="60" colspan='3'>
+              <input type="submit" name="submit" value=" <{$Think.lang.lan_change}>" class="coolbg np" />
+            </td>
+   
+          </tr>
+
+       </table>
+         </foreach>
+      </form>
+      
+	  </td>
+</tr>
+
+</table>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>用户等级</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+     <load href='__PUBLIC__/Js/style.js'/>
+</head>
+<body>
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="27" colspan="5" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b>用户等级</b> </td>
+          <td width="76%" align="right"><b>
+            </b>
+          </td>
+        </tr>
+      </table>
+     </td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td height="24" colspan="5">　</td>
+  </tr>
+  <tr bgcolor="#FBFCE2">
+    <td width="18%" height="24" align="center">选择<input name='all' type="checkbox" value=""></td>
+    <td width="23%" align="center">等级名称</td>
+   
+    <td width="12%" align="center">等级分数</td>
+    <td width="12%" align="center">修改时间</td>
+    <td width="23%" align="center">管理项</td>
+  </tr>
+  <form name="form" action="<{:U('do_sort')}>" method='post'>
+  <foreach name='lists' item='list'>
+    <tr bgcolor="#FFFFFF" align="center" class="hover">
+      <td width="18%" height="24" align="center"><input class="aid" type="checkbox" name="id[]" id="sort_<{$list['id']}>" value="<{$list['id']}>"/><{$list['id']}></td>
+    <td width="18%" height="24" align="center"><input class="sort"  name='gradename[]' id="<{$list['id']}>"   type='text' value="<{$list['gradename']}>"/></td>
+<td width="12%" align="center"><input class="score"  name='score[]' id="score_<{$list['id']}>"   type='text' value="<{$list['score']}>"/></td>
+<td width="12%" align="center"><{$list['optime']|date="Y-m-d H:i:s",###}></td>
+    <td >
+ 
+     <a href="<{:U('del',array('id'=>$list['id']))}>" class="<if condition="$list['id'] eq 1">nodel</if> confirmdel"><u>删除</u></a>
+    </td>
+  </tr>
+</foreach>
+    <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="5" align="center" valign="top">
+      <span><{$page}></span>
+    </td>
+  </tr>
+  <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="5" align="left" valign="top" style=" padding-left:10px">
+      <span><input type="submit"  value="点击修改" ></span>
+
+    </td>
+  </tr></form>
+   <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="5" align="left" valign="top">
+      <form action="<{:U('do_add')}>" method="post">
+       <table>
+      <tr>
+       <td>等级名称：<input name='gradename' type="text" style="width:300px"></td>
+       <td>等级分数：<input name='score' type="text" style="width:300px"></td>
+       <td>
+   
+       <input type="submit" value="添加"/></td>
+      </tr>
+      </table>
+      </form>
+      
+    </td>
+  </tr>
+</table>
+</body>
+</html>

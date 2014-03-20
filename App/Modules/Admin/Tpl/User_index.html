@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>系统用户管理</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+    <load href='__PUBLIC__/Js/style.js'/>
+	<script type="text/javascript">
+	$(function(){
+		$('.nodel').click(function(){
+			alert('<{$Think.lang.lan_zyd}>');
+			return false;
+		});
+   
+		
+		
+	});
+</script>
+</head>
+<body>
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="27" colspan="6" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b><{$gradename['gradename']}><{$Think.lang.lan_gl}></b> </td>
+          <td width="76%" align="right"><b>
+          
+            <a href="<{:u('add')}>"><u><{$Think.lang.lan_add}></u></a>
+        
+            </b>
+          </td>
+        </tr>
+      </table>
+     </td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td height="24" colspan="6">　<{$Think.lang.lan_zy}></td>
+  </tr>
+  <tr bgcolor="#FBFCE2">
+    <td width="18%" height="24" align="center"><{$Think.lang.lan_id}></td>
+    <td width="23%" align="center"><{$Think.lang.lan_nickname}></td>
+    <td width="12%" align="center"><{$Think.lang.lan_lastloginip}></td>
+    <td width="12%" align="center"><{$Think.lang.lan_lastlogintime}></td>
+    <td width="12%" align="center">等级</td>
+    <td width="23%" align="center"><{$Think.lang.lan_op}></td>
+  </tr>
+  <foreach name='lists' item='list'>
+    <tr bgcolor="#FFFFFF" align="center" class="hover">
+    <td width="18%" height="24" align="center"><{$list['username']}></td>
+    <td width="23%" align="center"><{$list['nickname']}></td>
+    <td width="12%" align="center"><{$list['loginip']}></td>
+    <td width="12%" align="center"><{$list['lastlogintime']|date="Y-m-d H:i:s",###}></td>
+    <td width="12%" align="center"><a href="<{:U('index',array('grade_id'=>$list['grade_id']))}>" title="点击查看等级的所有的会员"><{$list['gradename']}></a></td>
+    <td>
+     <a href="<{:U('edit',array('id'=>$list['id']))}>" ><u><{$Think.lang.lan_change}></u></a> |
+     <a href="<{:U('del',array('id'=>$list['id']))}>"  class='confirmdel'><u><{$Think.lang.lan_delc}></u></a>
+    </td>
+  </tr>
+</foreach>
+    <tr bgcolor="#F9FCEF">
+    <td height="24" colspan="6" align="center" valign="top">
+      <span><{$page}></span>
+    </td>
+  </tr>
+
+  <form action="<{:U('index')}>">
+  <tr bgcolor="#FFFFFF">
+   <td align="left">搜索会员：</td>
+   <td colspan="5"  align='left'>
+   会员等级
+   <select name='grade_id'>
+   
+    <option value="">不限制</option>
+    <foreach name="grade" item="g">
+      <option value="<{$g['id']}>" <if condition="$grade_id eq $g['id']">selected</if>><{$g['gradename']}></option>
+    </foreach>
+   </select>
+   <input type='text' name="key" style="width:200px;"/>&nbsp;&nbsp;<input type="submit" value="搜索" /></td>
+  </tr>
+  </form>
+
+
+</table>
+</body>
+</html>

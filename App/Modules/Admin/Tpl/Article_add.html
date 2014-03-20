@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>添加文章</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+  <load href='__ROOT__/Common/Js/ajaxfileupload.js'/>
+  <script  type="text/javascript">
+	   //渲染编辑器
+		 var pulugin='__PLUGIN__';
+     window.UEDITOR_HOME_URL=pulugin+"/Ueditor/";
+     var imageUrl='<{:U(GROUP_NAME."/Common/Upload")}>';
+    var imagePath='__ROOT__/<{:C("cfg_pic")}>';
+    var imageManagerUrl='<{:U(GROUP_NAME."/Common/ImgManger")}>';
+    var imageManagerPath='__ROOT__/';
+     $(function(){
+
+     });
+   // 图片上传url
+    var ajaxurl="<{:U('Article/ajaxup','','html')}>";
+    var ajaxurllist="<{:U('Article/ajaxuppic','','html')}>";
+    //图片删除url
+    var ajaxdel="<{:U('Article/del_img','','html')}>";
+    // 图片显示地址
+    var imageshow="__ROOT__/<{:C('cfg_pic')}>";
+    var imagecolse="__ROOT__/Common/Images/";
+	</script>
+  <load href='__PUBLIC__/Js/style.js'/>
+  <load href='__PLUGIN__/Ueditor/ueditor.config.js'/>
+  <load href='__PLUGIN__/Ueditor/ueditor.all.min.js'/>
+  <script type="text/javascript" src="__PLUGIN__/My97DatePicker/WdatePicker.js"></script>
+  <load href='__ROOT__/Common/Js/jquery.bigcolorpicker.js'/>
+  <load href='__ROOT__/Common/Css/jquery.bigcolorpicker.css'/>
+  <script type="text/javascript">
+    $(function(){
+      $("#nowcolor").bigColorpicker(function(el,color){
+        $("#" + $(el).attr("data-target"))
+                     .val(color);
+        $("#nowcolor").css("background" , color);
+       });
+
+
+     $('#detailContent').hide();
+     $('#heightContent').hide();
+     $('.config_title >span').click(function(){
+            var attr1=$(this).attr('rel');
+            //alert(attr1);
+            $('.config_title >span').each(function(){
+                var attr2=$(this).attr('rel');
+                if(attr1==attr2)
+                {
+                  $('#'+attr2).show();
+                }
+                else
+                {
+                  $('#'+attr2).hide();
+                }
+                if(attr1=='detailContent')
+                {
+                    design_editor('content');
+                    <foreach name='dfield' item='d'>
+                    <if condition="$d['type'] eq edit">
+                    design_editor("<{$d['code']}>");
+                    </if>
+                    </foreach>
+                }
+            });
+       });
+      
+    });
+  </script>
+</head>
+<body background='__PUBLIC__/Images/allbg.gif' leftmargin='8' topmargin='8'>
+	<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="19" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7"> 
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr> 
+          <td style="padding-left:10px;"><b><strong><{$Think.lang.lan_articleadd}></strong></b> </td>
+          <td align='right'><a href="<{:U('index',array('typeid'=>I('typeid')))}>"><b><strong><{$Think.lang.lan_articlelist}></strong></b></a> </td>
+        </tr>
+      </table></td>
+   </tr>
+  <tr>
+  <td height="215" align="center" valign="top" bgcolor="#FFFFFF">
+	<form  name="form1" action="<{:U(do_add)}>" method="post"  enctype="multipart/form-data">
+
+       <table width="98%" border="0" cellspacing="1" cellpadding="1">
+        <tr><td class='config_title' style="text-align:left;">
+          <span rel='baseContent'>基本内容</span> |  <span rel='detailContent'>详细内容</span> | <span rel='heightContent'>图片上传</span>
+        </td></tr>
+       </table>
+
+        <table width="98%" border="0" cellspacing="1" cellpadding="1" id='baseContent'>
+          <tr> 
+            <td width="8%" height="30"><span class='red'>*</span>文档标题：</td>
+            <td width="92%" style="text-align:left;">
+              <table>
+                <tr>
+                  <td align='left'><input name="title" type="text" id="title" size="16" style="width:300px" /> &nbsp;</td>
+                  <td align='left'>标题颜色：</td>
+                  <td align='left'>
+                     <div class='rel'>
+                       <input name="color" type="text" id="color" size="16" style="width:50px" /> &nbsp;
+                       <div data-target="color" id='nowcolor' style='left:70px'>选色</div>
+                     </div>
+                  </td>
+                </tr>
+              </table>
+           </td>
+          </tr>
+          
+          <tr> 
+            <td height="30"><span class='red'>*</span>栏目分类：</td>
+            <td style="text-align:left;">
+            	<select name="typeid" style="width:300px" >
+                <option value="<{$topid}>" style="background:#DCECA6"><{$topname}>(顶级栏目)</option>
+                 <foreach name='category' item='c'>
+                 <option value="<{$c['id']}>" <if condition="$reid eq $c['id']">selected='selected'</if>><{$c['fullname']}></option>
+                 </foreach>
+                </select>
+                &nbsp;
+            </td>
+          </tr>
+          
+           <tr> 
+            <td height="30">关键字：</td>
+            <td style="text-align:left;">
+            <input name='keywords' type="text"  style="width:300px">
+            </td>
+          </tr>
+           <tr> 
+            <td height="30">描述：</td>
+            <td style="text-align:left;">
+            <textarea name='description' style="width:300px;height:160px"></textarea>
+            </td>
+          </tr>
+           <tr> 
+            <td height="30">排序：</td>
+            <td style="text-align:left;">
+            <input name='sort' type="text"  style="width:300px" value="0">
+            </td>
+          </tr>
+          <tr> 
+            <td height="30"><span class='red'>*</span>文档属性：</td>
+            <td style="text-align:left;">
+            <if condition='$attr'>
+            <foreach name="attr" item='v'><label><input name="aid[]" type="checkbox"  value="<{$v['id']}>"/> <{$v['name']}>
+             </label>&nbsp;
+            </foreach>
+            </if>
+            审核
+            <input name="isshow" type="radio"  value="1" checked="checked"/>通过
+            <input name="isshow" type="radio"  value="0"/>不通过
+            </td>
+          </tr>
+       
+        
+
+           <tr> 
+            <td height="30">发布时间：</td>
+            <td style="text-align:left;">
+           <input readonly="readonly" name="time" type="text" style="width:300px" onClick="WdatePicker()" class="Wdate" value="<?php echo date('Y-m-d',time())?>"/>
+            </td>
+          </tr>   
+
+          <if condition='$dfield'>
+           <foreach name='dfield' item='d'>
+           <if condition="$d['type'] neq 'edit'">
+              <tr> 
+                <td height="30"><{$d['name']}>：</td>
+                <td style="text-align:left;">
+                <switch name="d['type']">
+                <case value="int"><input name="<{$d['code']}>" type="text" style="width:300px"/></case>
+                <case value="varchar"><input name="<{$d['code']}>" type="text" style="width:300px"/></case>
+                <case value="time"><input readonly="readonly" name="<{$d['code']}>" type="text" style="width:300px" onClick="WdatePicker()" class="Wdate" value="<?php echo date('Y-m-d',time())?>"/></case>
+                <case value="text"><textarea style="width:300px; height:130px" name="<{$d['code']}>" id='<{$d['code']}>'></textarea></case>
+                </switch>
+                </td>
+              </tr>
+           </if>
+           </foreach>
+          </if>
+
+        </table>
+
+        <table width="98%" border="0" cellspacing="1" cellpadding="1" id='detailContent'>
+         <if condition='$dfield'>
+           <foreach name='dfield' item='d'>
+           <if condition="$d['type'] eq 'edit'">
+            <tr> 
+              <td height="30" colspan="2" align='left'><{$d['name']}>：</td>
+              </tr>
+              <tr> 
+              <td height="30" colspan="2" style="text-align:left;"> <textarea name="<{$d['code']}>" style="width:100%;height:300px;" id='<{$d['code']}>'></textarea></td>
+            </tr>
+           </if>
+           </foreach>
+          </if>
+
+
+           <tr> 
+            <td height="30"  colspan="2"  style="text-align:left;">文档内容：</td>
+            
+          </tr>
+          <tr> 
+            <td height="30" colspan="2" style="text-align:left;">
+              <textarea name="content" id='content' style="width:100%;height:300px;"></textarea>
+            </td>
+          
+          </tr>
+        </table>
+
+        <table width="98%" border="0" cellspacing="1" cellpadding="1" id='heightContent'>
+            <tr> 
+            <td height="30" align='left'>列表图片：<img id="loading" src="__PUBLIC__/Images/loading.gif" style="display:none;"></td>
+            <td style="text-align:left;">
+            <input name='pic' type="file" id='img'  style="width:300px">&nbsp;
+            <input type="button"  value='上传' onclick='return ajaxFileUploadList();'/>
+            </td>
+          </tr>
+          <tr>
+            <td colspan='2'>
+              <div class='imgborder' id='infoList'>
+                <ul></ul>
+              </div>
+            </td>
+          </tr>
+
+          <tr  class="up"> 
+            <td height="30"  align='left'>图片集上传：<img id="loadingPic" src="__PUBLIC__/Images/loading.gif" style="display:none;"></td>
+            <td style="text-align:left;">
+            <input name="img" type="file" id="pic" size="16" style="width:300px" /> &nbsp;
+            <input type="button"  value='上传' onclick='return ajaxFileUpload();'/>
+            <!-- <span  class="add-img">添加图片</span> -->
+            </td>
+          </tr>
+          <tr>
+            <td colspan='2'>
+              <div class='imgborder' id='info'>
+                <ul></ul>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+
+        <table width="98%" border="0" cellspacing="1" cellpadding="1">
+           <tr>
+            <td colspan='2' align='left'>
+              <input type="submit" name="submit" value=" <{$Think.lang.lan_submit}> " class="coolbg np" />
+            </td>
+           </tr>
+        </table>
+      </form>
+	  </td>
+</tr>
+</table>
+</body>
+</html>

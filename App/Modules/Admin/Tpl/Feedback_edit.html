@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>添加文章</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+
+    <load href='__PUBLIC__/Js/style.js'/>
+
+</head>
+<body background='__PUBLIC__/Images/allbg.gif' leftmargin='8' topmargin='8'>
+	<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="19" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7"> 
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr> 
+          <td style="padding-left:10px;"><b><strong>查看留言</strong></b> </td>
+          <td align='right'>
+          <a href="<{:U('index')}>">
+          <b>
+          <strong>留言列表</strong>
+          </b></a> </td>
+        </tr>
+      </table></td>
+   </tr>
+  <tr>
+  <td height="215" align="center" valign="top" bgcolor="#FFFFFF">
+	<form  name="form1" action="<{:U(do_edit)}>" method="post"  enctype="multipart/form-data">
+        <table width="98%" border="0" cellspacing="1" cellpadding="1">
+          <tr> 
+            <td width="9%" height="30">留言标题：</td>
+            <td width="91%" style="text-align:left;"><{$data['title']}> &nbsp;
+           </td>
+          </tr>
+          
+       
+          <tr> 
+            <td width="9%" height="30">留言内容：</td>
+            <td width="91%" style="text-align:left;"><{$data['content']}> &nbsp;
+           </td>
+          </tr>
+          
+          
+           <tr> 
+            <td width="9%" height="30">座机电话：</td>
+            <td width="91%" style="text-align:left;"><{$data['tel']}> &nbsp;
+           </td>
+          </tr>
+          
+          
+           <tr> 
+            <td width="9%" height="30">手机电话：</td>
+            <td width="91%" style="text-align:left;"><{$data['phone']}> &nbsp;
+           </td>
+          </tr>
+         
+           <tr> 
+            <td width="9%" height="30">联系地址：</td>
+            <td width="91%" style="text-align:left;"><{$data['address']}> &nbsp;
+           </td>
+          </tr>
+          
+            
+           <tr> 
+            <td width="9%" height="30">传真：</td>
+            <td width="91%" style="text-align:left;"><{$data['fax']}> &nbsp;
+           </td>
+          </tr>
+          
+          
+            
+           <tr> 
+            <td width="9%" height="30">联系人：</td>
+            <td width="91%" style="text-align:left;"><{$data['person']}> &nbsp;
+           </td>
+          </tr>
+          
+          
+          
+            
+           <tr> 
+            <td width="9%" height="30">回复内容：</td>
+            <td width="91%" style="text-align:left;">
+            <textarea name="reply" style=" width:500px; height:160px;"><{$data['reply']}></textarea>
+            
+             &nbsp;
+           </td>
+          </tr>
+          
+          
+            
+           <tr> 
+            <td width="9%" height="30">是否显示：</td>
+            <td width="91%" style="text-align:left;">
+            <input name="isshow"  value="1" type="radio" <if condition="$data['isshow'] eq 1">checked</if>>是 <input name="isshow"  value="0" type="radio" <if condition="$data['isshow'] eq 0">checked</if>>否
+            
+             &nbsp;
+           </td>
+          </tr>
+
+          <tr> 
+            <td height="60">&nbsp;</td>
+            <td>
+                 <input name="id" type="hidden" value="<{$data['id']}>"/>
+            	<input type="submit" name="submit" value=" <{$Think.lang.lan_submit}> " class="coolbg np" />
+            </td>
+          </tr>
+        </table>
+      </form>
+	  </td>
+</tr>
+</table>
+</body>
+</html>

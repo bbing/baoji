@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>分配权限</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+    <load href='__PUBLIC__/Js/style.js'/>
+    
+    <script>
+	 $(function(){
+		 
+    
+			 
+			 $('input[level=1]').click(function(){
+				 
+				 var inputs=$(this).parents('.app').find('input');
+				
+				 
+				 $(this).attr('checked')?inputs.attr('checked','checked'):inputs.removeAttr('checked');
+				 
+				 
+				 });
+			 $('input[level=2]').click(function(){
+				 
+				 var inputs=$(this).parents('dl').find('input');
+				
+				 
+				 $(this).attr('checked')?inputs.attr('checked','checked'):inputs.removeAttr('checked');
+				 
+				 
+				 });
+			 
+			 });
+		
+	
+	</script>
+
+</head>
+<body>
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="27" colspan="6" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b>分配权限</b> </td>
+          <td width="76%" align="right"><b>
+          
+           
+        
+            </b>
+          </td>
+        </tr>
+      </table>
+     </td>
+  </tr>
+    <form action="<{:U(GROUP_NAME.'/Rbac/do_addAccess')}>" method='post'>
+  <tr bgcolor="#FFFFFF">
+    <td  colspan="6" class="warp" style="padding:10px">　
+
+    <foreach name='lists' item='list'>
+      <div class='app'>
+       <p><strong><input level='1' type="checkbox"  name="access[]" value="<{$list['id']}>_1" <if condition="$list['access']">checked='checked'</if> /><{$list['title']}></strong>
+     
+       </p>
+    
+    
+      <foreach name="list.child" item='action'>
+      
+       <dl>
+       
+       <dt><strong><input type="checkbox" level='2' name="access[]" value="<{$action['id']}>_2" <if condition="$action['access']">checked='checked'</if> /><{$action['title']}></strong>
+     </dt>
+        <foreach name="action.child" item='method'>
+        <dd><strong><input type="checkbox" level='3'  name="access[]" value="<{$method['id']}>_3" <if condition="$method['access']">checked='checked'</if>/><{$method['title']}></strong>
+        </dd>
+       </foreach>
+       </dl>
+       
+      </foreach>
+     </div>
+    </foreach>
+   
+   
+    
+    
+    </td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+  <td>&nbsp;</td>
+  <td  colspan="5"><input type="submit"  value="保存"/></td></tr>
+  <input type="hidden" value='<{$Think.get.id}>' name='role_id'"/>
+ </form>
+  
+</table>
+</body>
+</html>

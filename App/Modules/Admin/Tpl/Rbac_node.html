@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>节点列表</title>
+	<load href="__PUBLIC__/Css/base.css" />
+	<load href='__PUBLIC__/Js/jquery.js'/>
+    <load href='__PUBLIC__/Js/style.js'/>
+
+</head>
+<body>
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="27" colspan="6" background="__PUBLIC__/Images/tbg.gif" bgcolor="#E7E7E7">
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="24%" style="padding-left:10px;"><b>节点列表</b> </td>
+          <td width="76%" align="right"><b>
+          
+           <a href="<{:u('addNode')}>"><u>添加应用</u></a>
+        
+            </b>
+          </td>
+        </tr>
+      </table>
+     </td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td  colspan="6" class="warp" style="padding:10px">　
+     
+    <foreach name='lists' item='list'>
+    <div class='app'>
+      <p><strong><{$list['title']}><if condition="$list['status'] eq 0">（关闭）</if></strong>
+       <a href="<{:U('addNode',array('pid'=>$list['id'],'level'=>2))}>">[添加控制器]</a>
+       <a href="<{:U('editNode',array('id'=>$list['id']))}>">[修改]</a>
+       <a href="<{:U('delNode',array('id'=>$list['id']))}>" class='confirmdel'>[删除]</a>
+       </p>
+    
+    
+      <foreach name="list.child" item='action'>
+      
+       <dl>
+       
+       <dt><strong><{$action['title']}><if condition="$action['status'] eq 0">（关闭）</if></strong>
+       <a href="<{:U('addNode',array('pid'=>$action['id'],'level'=>3))}>">[添加方法]</a>
+       <a href="<{:U('editNode',array('id'=>$action['id'],'level'=>3))}>">[修改]</a>
+       <a href="<{:U('delNode',array('id'=>$action['id'],'level'=>3))}>" class='confirmdel'>[删除]</a></dt>
+        <foreach name="action.child" item='method'>
+        <dd><strong><{$method['title']}><if condition="$method['status'] eq 0">（关闭）</if></strong>
+        <a href="<{:U('editNode',array('id'=>$method['id'],'level'=>3))}>">[修改]</a>
+        <a href="<{:U('delNode',array('id'=>$method['id'],'level'=>3))}>" class='confirmdel'>[删除]</a></dd>
+       </foreach>
+       </dl>
+       
+      </foreach>
+     </div>
+    </foreach>
+    
+   
+    
+    
+    </td>
+  </tr>
+
+  
+</table>
+</body>
+</html>
